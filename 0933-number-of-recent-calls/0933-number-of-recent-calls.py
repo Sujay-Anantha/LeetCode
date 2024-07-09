@@ -1,24 +1,19 @@
 class RecentCounter:
 
     def __init__(self):
-        self._start = 0
-        self._range = []
+        self.queue = deque()
         
 
     def ping(self, t: int) -> int:
-        # add request to requests
-        self._range.append(t)
+        # Upon Ping add new ping to queue
+        self.queue.append(t)
 
-        # get the range
-        cur_start, cur_end = t-3000, t
-
-        # check if start is not within range
-        while self._range[self._start] < cur_start:
-            
-            # incr the start
-            self._start += 1
-
-        return len(self._range) - self._start
+        # Remove all ping in queue with value more than 3000 away from new ping
+        while self.queue and self.queue[0] + 3000 < t:
+            self.queue.popleft()
+        
+        # Return length of queue
+        return len(self.queue)
         
 
 
