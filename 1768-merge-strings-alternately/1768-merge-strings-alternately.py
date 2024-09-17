@@ -2,7 +2,6 @@ class Solution:
     def mergeAlternately(self, word1: str, word2: str) -> str:
         m,n = len(word1) , len(word2)
         merged = ""
-        print(m,n)
         for i in range (min(m,n)):
             
             merged += word1[i]+word2[i]
