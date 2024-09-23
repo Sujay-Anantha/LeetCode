@@ -1,47 +1,18 @@
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        
-        if (x<0) or (x%10  == 0 and x != 0):
+# If the number is negative or if it ends with a zero (but is not zero), it's not a palindrome
+        if x < 0 or (x % 10 == 0 and x != 0):
             return False
         
-        j = 0
-        while x > j:
-            
-            j = j * 10 + (x % 10)
-            x = x // 10
+        reversed_half = 0
+        while x > reversed_half:
+            # Add the last digit of x to the reversed half
+            reversed_half = reversed_half * 10 + x % 10
+            # Remove the last digit from x
+            x //= 10
         
-        return x == j or x == j//10
-
-        
-        
-        
-#         Umpire:
-#             Understand:
-                            # what if the x is length 1?
-                            # what if the x is 0?
-            
-#             Match/Map:
-            
-#             Plan:
-                
-#             Implement:
-                
-#             Review:
-
-'''
-121
-
-x = 121
-j = 0
-
-j = 1
-x =12
-
-j =12
-x =1 
-
-return x = 1 and j 1
-'''
-
-#             Evaluate:
-            
+        # The number is a palindrome if:
+        # - The first half (x) is equal to the second half (reversed_half)
+        # - or if the first half (x) is equal to reversed_half // 10 (for odd-length numbers)
+        return x == reversed_half or x == reversed_half // 10
+    
