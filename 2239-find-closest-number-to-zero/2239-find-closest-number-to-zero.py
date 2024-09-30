@@ -6,7 +6,10 @@ class Solution:
         # Iterate through the array
         for num in nums:
             # If this number is closer to zero, or it's the same distance but larger, update closest
-            if abs(num) < abs(closest) or (abs(num) == abs(closest) and num > closest):
+            if abs(num) < abs(closest):
                 closest = num
         
-        return closest
+        if closest < 0 and abs(closest) in nums:
+            return abs(closest)
+        else:
+            return closest
