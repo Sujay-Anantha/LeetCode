@@ -1,12 +1,19 @@
 class Solution:
     def averageWaitingTime(self, customers: List[List[int]]) -> float:
-        chef_time = customers[0][0]
-        wait_time = []
+        chef_time = 0  # Tracks when the chef will finish serving the current customer
+        total_wait_time = 0  # Accumulates the total waiting time
         
         for cust in customers:
-            chef_time = max(chef_time, cust[0])
-            chef_time += cust[1]
+            arrival, prep_time = cust
             
-            wait_time.append(chef_time-cust[0])
+            # Update chef's available time: if the chef is idle, start when the customer arrives
+            chef_time = max(chef_time, arrival)
             
-        return sum(wait_time)/len(wait_time)
+            # Calculate the total time the customer waits (prep time + any idle time)
+            total_wait_time += (chef_time + prep_time - arrival)
+            
+            # Update when the chef will be available next
+            chef_time += prep_time
+        
+        # Return the average waiting time
+        return total_wait_time / len(customers)
