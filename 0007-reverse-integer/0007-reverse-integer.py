@@ -12,11 +12,10 @@ class Solution:
             mer = (mer * 10) + m 
             x  = x // 10
         
-        if -2**31 > mer or mer > (2**31)-1:
+        if mer > (2**31)-1:
             return 0
-        
-        mer = mer * neg
+ 
             
-        return mer
+        return mer * neg
         
         
