@@ -9,5 +9,4 @@ class Solution:
             
             wait_time.append(chef_time-cust[0])
             
-        print(wait_time)
         return sum(wait_time)/len(wait_time)
