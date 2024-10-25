@@ -1,18 +1,15 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        if len(nums) == 1:
-            return nums[0]
-        l, r = 0, len(nums)-1
-        ans = float('inf')
-        while l <= r:
-            if nums[l] < nums[r]:
-                ans = min(ans,nums[l])
+        l, r = 0, len(nums) - 1
+        
+        while l < r:
+            mid = (l + r) // 2
+            # If the middle element is greater than the rightmost element,
+            # then the minimum must be in the right half
+            if nums[mid] > nums[r]:
+                l = mid + 1
+            # Otherwise, the minimum is in the left half (including mid)
             else:
-                ans = min(ans, nums[r])
-            
-            l += 1
-            r -= 1
-        
-        return ans
-            
-        
+                r = mid
+                
+        return nums[l]
