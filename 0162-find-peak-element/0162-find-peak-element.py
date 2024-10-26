@@ -1,13 +1,17 @@
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
-        maximum = max(nums)
+        l, r = 0, len(nums) - 1
         
-        # if len(nums) >2:
-        #     maximum = max(nums[1:len(nums)-1])
-        
-        
-        
-        return nums.index(maximum)
-        
+        while l < r:
+            mid = (l + r) // 2
             
+            # Check the mid element with its right neighbor
+            if nums[mid] > nums[mid + 1]:
+                # There must be a peak in the left half (including mid)
+                r = mid
+            else:
+                # There must be a peak in the right half
+                l = mid + 1
         
+        # l and r will converge to the peak index
+        return l
